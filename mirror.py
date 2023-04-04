@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import sentry_sdk
 from os import getenv
+from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.triggers.cron import CronTrigger
 
 
 
@@ -17,4 +19,10 @@ if __name__ == "__main__":
         f.write("{}")
     if sentry_dsn := getenv("SENTRY_DSN"):
         sentry_sdk.init(sentry_dsn)
-    main()
+
+    scheduler = BlockingScheduler()
+    scheduler.add_job(
+        main,
+        CronTrigger.from_crontab(getenv("CRON")),
+    )
+    scheduler.start()
