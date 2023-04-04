@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: github-gitea-mirror
+    image: w0rng/github-gitea-mirror:latest
+    command: pytnon mirror.py
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./src/config.json:/app/config.json
+      - cache:/cache
+
+volumes:
+  cache:
