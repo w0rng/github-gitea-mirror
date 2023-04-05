@@ -788,3 +788,6 @@ ASALocalRun/
 
 README.md
 LICENSE
+.idea
+.git
+.venv

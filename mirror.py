@@ -3,10 +3,12 @@ import sentry_sdk
 from os import getenv
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
+import requests
 
 
 
 def main():
+    requests.post(getenv("HEALTH_CHECK"))
     import gist
     import giststared
     import repoForked
